@@ -1,0 +1,29 @@
+class Solution {
+  private:
+    // FIX 1 & 2: Added '&' to result, changed vector<int> to vector<bool> for visited
+    void dfsHelper(int node, vector<vector<int>>& adj, vector<bool>& visited, vector<int>& result)
+    {
+        visited[node] = true;
+        result.push_back(node);
+        
+        for(int neighbour: adj[node])
+        {
+            if(!visited[neighbour])
+            {
+                dfsHelper(neighbour, adj, visited, result);
+            }
+        }
+    }
+    
+  public:
+    vector<int> dfs(vector<vector<int>>& adj) {
+        // Code here
+        int V = adj.size();
+        vector<int> dfs_result;
+        vector<bool> visited(V, false);
+        
+        dfsHelper(0, adj, visited, dfs_result);
+        
+        return dfs_result;
+    }
+};
